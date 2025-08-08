@@ -1,4 +1,6 @@
-function formatProduct(productName:string,price:number, stockStatus:boolean,discountCode:string | null):string{
+type ProductDetails= (productName:string, price:number, stockStatus:boolean, discountCode:string | null)=>string;
+
+const formatProduct:ProductDetails=(productName,price,stockStatus,discountCode)=>{
     return `The name of product is ${productName}, the price is ${price}, it is ${stockStatus?"in":"not in"} stock${discountCode!=null?" and has discount code.":"."}`;
 }
 
