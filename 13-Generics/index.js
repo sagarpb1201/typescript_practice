@@ -4,10 +4,10 @@ function wrapInArray(element) {
     return [element];
 }
 function logAndReturn(element) {
-    console.log(element);
+    console.log(element.length);
     return element;
 }
 const wrappedString = wrapInArray("hello");
 const wrappedNumber = wrapInArray(123);
-logAndReturn(['Helelellele']);
+logAndReturn('Helelellele');
 //# sourceMappingURL=index.js.map
