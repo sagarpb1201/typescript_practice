@@ -9,3 +9,59 @@ type Product = {
   createdAt: Date;     // Set by the server on creation
   updatedAt: Date;     // Set by the server on update
 };
+
+// Let's pretend this is our database table
+const products: Product[] = [
+    {
+        id: 'abc-123',
+        name: 'Quantum Laptop',
+        description: 'A laptop from the future.',
+        price: 2500,
+        stock: 15,
+        category: 'electronics',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'def-456',
+        name: 'Ergonomic Keyboard',
+        description: 'Type for hours without strain.',
+        price: 150,
+        stock: 50,
+        category: 'electronics',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }
+];
+
+type updateProductSuccessResponse={
+    status:true;
+    product:Product;
+}
+
+type updateProductFailureResponse={
+    status:false;
+    message:string;
+}
+
+type UpdateProductResponse=updateProductFailureResponse | updateProductSuccessResponse;
+
+function updateProduct(id:string,data:Partial<Product>):UpdateProductResponse{
+  const result=products.find(product=>product.id===id);
+  if(result!=undefined){
+    Object.assign(result,data);
+    result.updatedAt=new Date();
+    return {status:true,product:result};
+  }else{
+    return {status:false,message:'Product not found'}
+  }
+}
+
+function logProductAnalytics(data:Readonly<Product>):void{}
+
+const result=updateProduct('abc-123', { price: 2399, stock: 10 });
+if(result.status==true){
+  console.log(result.product)
+}else{
+  console.log(result.message);
+}

@@ -11,7 +11,7 @@
     "target": "esnext",
     "types": [],
     // For nodejs:
-    "lib": ["ES2015","DOM"],
+    "lib": ["ES2017","DOM"],
     // "types": ["node"],
     // and npm install -D @types/node
 
