@@ -10,6 +10,18 @@ type Product = {
   updatedAt: Date;     // Set by the server on update
 };
 
+type ProductName={
+  name:string
+}
+
+type ProductListView = Pick<Product, 'id' | 'name' | 'price'>;
+type CreateProductInput = Omit<Product, 'id' | 'createdAt' | 'updatedAt'>;
+type IdType<T> = T extends { id: unknown } ? T['id'] : never;
+
+// --- Test Types for Generics ---
+type ProductId = IdType<Product>;
+type ProductNameId = IdType<ProductName>;
+
 // Let's pretend this is our database table
 const products: Product[] = [
     {
@@ -33,6 +45,15 @@ const products: Product[] = [
         updatedAt: new Date(),
     }
 ];
+
+const ProductNames:ProductName[]=[
+    {
+        name:'Mouse'
+    },
+    {
+        name:'Keyboard'
+    }
+]
 
 type updateProductSuccessResponse={
     status:true;
