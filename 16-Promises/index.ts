@@ -1,4 +1,4 @@
-import { updateProduct } from "./product.service.js";
+import { updateProduct,getProductDetails,getProductReviews,getProductStock } from "./product.service.js";
 import type { UpdateProductResponse } from "./product.service.js";
 
 try{
@@ -10,4 +10,14 @@ try{
     }
 }catch(error){
     console.error(error)
+}
+
+try{
+    const productDetailsPromise = getProductDetails('abc-123');
+    const productReviewsPromise = getProductReviews('abc-123');
+    const productStockPromise = getProductStock('abc-123');
+    const [productResult, reviewsResult, stockResult] = await Promise.all([productDetailsPromise, productReviewsPromise, productStockPromise]);
+    console.log({ productResult, reviewsResult, stockResult });
+}catch(error){
+    console.error(error);
 }

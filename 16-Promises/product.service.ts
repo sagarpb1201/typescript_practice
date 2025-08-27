@@ -63,4 +63,48 @@ export async function updateProduct(id:string,data:Partial<Product>):Promise<Upd
   })
 }
 
+export type Review = {
+  userId: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+  comment: string;
+};
+
+export async function getProductDetails(id: string): Promise<Product | undefined> {
+  console.log(`Fetching details for product ${id}...`);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const product = products.find(p => p.id === id);
+      console.log(`Found details for ${id}.`);
+      resolve(product);
+    }, 500);
+  });
+}
+
+export async function getProductStock(id: string): Promise<number> {
+  console.log(`Fetching stock for product ${id}...`);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // In a real system, this would be a database query.
+      const stock = 42; 
+      console.log(`Stock for ${id} is ${stock}.`);
+      resolve(stock);
+    }, 200);
+  });
+}
+
+export async function getProductReviews(id: string): Promise<Review[]> {
+  console.log(`Fetching reviews for product ${id}...`);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // In a real system, this would be another database query.
+      const reviews: Review[] = [
+        { userId: 'user-1', rating: 5, comment: 'Absolutely fantastic!' },
+        { userId: 'user-2', rating: 4, comment: 'Works well, but a bit pricey.' },
+      ];
+      console.log(`Found ${reviews.length} reviews for ${id}.`);
+      resolve(reviews);
+    }, 800);
+  });
+}
+
 function logProductAnalytics(data:Readonly<Product>):void{}
